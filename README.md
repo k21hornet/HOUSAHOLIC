@@ -3,6 +3,10 @@
 自分にとって良い行いをすると経験値が貯まるが、スマホをだらだら見て過ごすなどの悪いことをすると経験値が減る。
 悪い行いも含めて自分で記録することで日頃の行いを見つめなおす機会になり、経験値を貯めるために自堕落な生活も改善することができる。
 
+# 様子
+<img width="1194" alt="gazo" src="https://github.com/k21hornet/HOUSAHOLIC/assets/104039651/253ffc03-feef-4116-bdc3-5c49fc7971fd">
+
+
 # 主な使用技術
 - Spring Boot
 - Spring Security
