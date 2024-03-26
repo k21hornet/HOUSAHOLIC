@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOUSAHOLIC</title>
+  <link rel="stylesheet" th:href="@{/css/housaholic.css}" />
+</head>
+
+<body>
+<div class="sideber">
+  <div class="user-card">
+    <span th:text="*{username}" class="user-name"></span>
+    <div class="exp">EXP : <span th:text="${exp}"></span></div>
+  </div>
+
+  <a th:href="@{/}" class="sideber-link">ホーム</a>
+  <a th:href="@{/category}" class="sideber-link">カテゴリー編集</a>
+  <a th:href="@{/todo}" class="sideber-link">TODO</a>
+
+  <form th:action="@{/logout}" method="post">
+    <button type="submit" class="logout-button">ログアウト</button>
+  </form>
+</div>
+
+
+<div class="mainpage-category">
+  <div class="category">
+    <form th:action="@{/category/create}" method="post" th:object="${categoryInput}" class="category-form">
+      <input type="text" name="categoryName" th:value="*{categoryName}" placeholder="カテゴリーを追加" class="category-input">
+    </form>
+
+    <div class="category-title">
+      <span>category</span>
+      <span>削除</span>
+    </div>
+
+    <div th:each="category:${categories}" class="category-item">
+      <span th:text="${category.categoryName}"></span>
+      <div th:if="${category.getIsDefault()!=1}">
+        <form th:action="@{/category/delete}" method="post" th:object="${categoryInput}">
+          <input type="hidden" th:value="${category.id}" name="id">
+          <input type="hidden" th:value="${category.categoryName}" name="category">
+          <input type="submit" value="X" class="delete-button">
+        </form>
+      </div>
+      <div th:if="${category.getIsDefault()==1}">
+        <input type="submit" value="X" class="cannot-delete-button">
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

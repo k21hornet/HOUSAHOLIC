@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOUSAHOLIC</title>
+  <link rel="stylesheet" th:href="@{/css/auth.css}" />
+</head>
+
+<body>
+<div id="error-message" style="color: red;"></div>
+<div class="signup-card">
+  <h2 class="auth-title">新規登録</h2>
+  <form th:action="@{/signup}" method="post" th:object="${signupInput}" class="signup-form">
+    <span class="form-label">ユーザー名</span>
+    <input type="text" name="username" th:value="*{username}">
+    <span class="form-label">メールアドレス</span>
+    <input type="email" name="email" th:value="*{email}">
+    <span class="form-label">パスワード</span>
+    <input type="password" name="password" th:value="*{password}">
+    <span class="form-label">確認用パスワード</span>
+    <input type="password" name="passwordConfirm" th:value="*{passwordConfirm}">
+    <button type="submit" class="auth-button">新規登録</button>
+  </form>
+  <a th:href="@{/login}">ログインはこちら</a>
+</div>
+
+<script>
+    // ウィンドウがロードされたときのイベントリスナーを設定します。
+    window.onload = function() {
+        // 現在のURLのクエリパラメータを取得します。
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // 'error' という名前のクエリパラメータを取得します。
+        const errorMessage = urlParams.get('error');
+
+        // errorMessageが存在する場合（エラーメッセージがURLに含まれる場合）
+        if (errorMessage) {
+            // エラーメッセージを表示するためのHTML要素にテキストとしてセットします。
+            document.getElementById('error-message').textContent = errorMessage;
+        }
+    };
+</script>
+</body>
+</html>

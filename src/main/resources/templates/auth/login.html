@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOUSAHOLIC</title>
+  <link rel="stylesheet" th:href="@{/css/auth.css}" />
+</head>
+
+<body>
+  <div id="error-message" style="color: red;"></div>
+  <div id="account-created-message" style="color: green;"></div>
+  <div class="login-card">
+    <h2 class="auth-title">ログイン</h2>
+    <form th:action="@{/login}" method="post" class="login-form">
+      <span class="form-label">メールアドレス</span>
+      <input type="email" name="email">
+      <span class="form-label">パスワード</span>
+      <input type="password" name="password">
+      <button type="submit" class="auth-button">ログイン</button>
+    </form>
+    <a th:href="@{/signup}">新規登録はこちら</a>
+  </div>
+
+<script>
+    // ウィンドウがロードされたときのイベントリスナーを設定します。
+    window.onload = function() {
+        // 現在のURLのクエリパラメータを取得します。
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // 'error' という名前のクエリパラメータを取得
+        const errorMessage = urlParams.get('error');
+        const statusMessage = urlParams.get('status');
+
+        // errorMessageが存在する場合（エラーメッセージがURLに含まれる場合）
+        if (errorMessage) {
+            // エラーメッセージを表示するためのHTML要素にテキストとしてセット
+            document.getElementById('error-message').textContent = "メールまたはパスワードが間違っています。";
+        }else if (statusMessage) {
+            document.getElementById('account-created-message').textContent = "アカウントが正常に作成されました。";
+        }
+    };
+</script>
+</body>
+</html>

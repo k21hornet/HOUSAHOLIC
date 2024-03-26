@@ -1,0 +1,2 @@
+CREATE USER hshuser WITH PASSWORD 'password';
+CREATE DATABASE hshdb OWNER hshuser ENCODING 'UTF8';

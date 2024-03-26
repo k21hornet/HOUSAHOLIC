@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOUSAHOLIC</title>
+  <link rel="stylesheet" th:href="@{/css/housaholic.css}" />
+</head>
+
+<body>
+<div class="sideber">
+  <div class="user-card">
+    <span th:text="*{username}" class="user-name"></span>
+    <div class="exp">EXP : <span th:text="${exp}"></span></div>
+  </div>
+
+  <a th:href="@{/}" class="sideber-link">ホーム</a>
+  <a th:href="@{/category}" class="sideber-link">カテゴリ一編集</a>
+  <a th:href="@{/todo}" class="sideber-link">TODO</a>
+
+  <form th:action="@{/logout}" method="post">
+    <button type="submit" class="logout-button">ログアウト</button>
+  </form>
+</div>
+
+
+<div class="mainpage-todo">
+
+  <div class="todolist">
+    <form th:action="@{/todo/create}" method="post" th:object="${todoInput}" class="todo-form">
+      <input type="text" name="todo" th:value="*{todo}" placeholder="TODOを入力" class="todo-input">
+    </form>
+
+    <div class="todolist-title">
+      <span>Todo</span>
+      <span>削除</span>
+    </div>
+
+    <div th:each="todo:${todos}" class="todolist-item">
+      <span th:text="${todo.todo}"></span>
+      <div>
+        <form th:action="@{/todo/delete}" method="post" th:object="${todoInput}">
+          <input type="hidden" th:value="${todo.id}" name="id">
+          <input type="hidden" th:value="${todo.todo}" name="todo">
+          <input type="submit" value="X" class="delete-button">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
